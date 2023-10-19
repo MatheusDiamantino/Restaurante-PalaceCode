@@ -1,0 +1,146 @@
+img{
+  width: 70px;
+  transform: rotate(10deg);
+}
+
+.login {
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 350px;
+  width: 300px;
+  flex-direction: column;
+  gap: 35px;
+  box-shadow: 16px 16px 32px #00000031,
+        -16px -16px 32px #0000003d;
+  border-radius: 16px;
+  top: 30px;
+  right: 0%;
+  max-width: 500px;
+  border: none;
+}
+
+.inputBox {
+  position: relative;
+  width: 250px;
+}
+
+.inputBox input {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: none;
+  color: #000000;
+  font-size: 1em;
+  background: transparent;
+  border-left: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  transition: 0.1s;
+  border-bottom-left-radius: 8px;
+}
+
+.inputBox span {
+  margin-top: 5px;
+  position: absolute;
+  left: 0;
+  transform: translateY(-4px);
+  margin-left: 10px;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 12px;
+  color: #787878;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 3px;
+  border-radius: 8px;
+}
+
+.inputBox input:valid~span,
+.inputBox input:focus~span {
+  transform: translateX(113px) translateY(-15px);
+  font-size: 0.8em;
+  padding: 5px 10px;
+  background: #000000;
+  letter-spacing: 0.2em;
+  color:linear-gradient(rgb(41, 41, 41), purple);
+  border: 2px;
+}
+
+
+
+.inputBox input:valid,
+.inputBox input:focus {
+  border: 2px solid #000;
+  border-radius: 8px;
+}
+
+.enter {
+  height: 45px;
+  width: 100px;
+  border-radius: 5px;
+  border: 2px solid #000;
+  cursor: pointer;
+  background-color: transparent;
+  transition: 0.5s;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 2px;
+  margin-bottom: 1em;
+}
+
+.enter:hover {
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
+
+.corpo {
+  background:rgb(54, 56, 56);
+  background-image: url("../img/fundo2.png");
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+}
+
+.container {
+  display: center;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.card-body {
+  padding: 40px;
+  position: relative;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+
+}
+
+
+.form-check-label {
+  font-size: 14px;
+}
+
+.logo {
+  position: absolute;
+  top: -5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 250px;
+  height: auto;
+}

@@ -1,0 +1,41 @@
+
+.fundo-2{
+  background-image: url("../img/fundo2.png");  
+}
+
+
+img{
+    width: 70px;
+   transform: rotate(10deg);
+}
+
+.editf{
+    position: relative;
+    left: 50px;
+    border-radius: 10px;
+  }
+
+  .my-button {
+    background-color: #000000;
+    font-size: 16px;
+    padding: 10px 20px;
+
+  }
+  
+  .my-button:hover {
+    background-color: gray;
+    color: white;
+  }
+
+  /* Estilo personalizado para o select */
+  .meu-select {
+      color: red; /* Altere para a cor desejada */
+      background-color: black; /* Altere para a cor desejada */
+      border: none; /* Remova ou personalize a borda conforme necessário */
+      padding: 5px; /* Ajuste o espaçamento interno conforme necessário */
+  }
+  
+  /* Estilo personalizado para o texto das opções */
+  .meu-select option {
+      color: blue; /* Altere para a cor desejada */
+  }

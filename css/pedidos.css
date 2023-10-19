@@ -1,0 +1,52 @@
+
+.fundo-2{
+    background-image: url("../img/fundo2.png");    
+  }
+  
+  
+    
+  
+
+
+.tabela2{
+    
+    background-image: url("/img/fundoes.gif");
+}
+
+.logo-tcc {
+   width: 70px;
+   transform: rotate(10deg);
+}
+
+.img-profile {
+    width: 70px;
+    transform: rotate(10deg);
+ }
+
+
+
+.btn-custom {
+    padding: 1px 15px 3px 2px;
+    border-radius: 50px;
+}
+
+.btn-icon {
+    padding:8px;
+    background: #ffffff;
+}
+
+.coluna {
+    width: 50%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mesa {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 30px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+

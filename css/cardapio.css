@@ -1,0 +1,76 @@
+
+.fundo-2{
+  background-image: url("../img/fundo2.png");  
+}
+
+
+.logo-tcc {
+  width: 70px;
+  transform: rotate(10deg);
+}
+
+.img-profile {
+   width: 70px;
+   transform: rotate(10deg);
+}
+
+.img-cardapio {
+  width: 60%;
+  height: 30%;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid black;
+}
+
+
+
+
+.add-food-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  z-index: 9999;
+}
+
+.add-food-popup form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-food-popup label {
+  margin-bottom: 5px;
+}
+
+.add-food-popup input[type="text"],
+.add-food-popup input[type="number"] {
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+}
+
+.add-food-popup button[type="submit"] {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.add-food-popup button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
