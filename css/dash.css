@@ -1,0 +1,143 @@
+/* Seletores globais */
+.cardGrafic {
+  width: 70%;
+  margin: 20px auto 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Logo e banner */
+.logopalacio {
+  transform: rotate(15deg);
+  position: relative;
+  left: -10px;
+  top: 30px;
+}
+
+.banner {
+  position: relative;
+  width: 650px;
+  transform: rotate(0deg);
+  bottom: 20px;
+}
+
+/* Sidebar e sidebar-brand */
+.sidebar-brand {
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.sidebar-brand-icon img {
+  width: 150px;
+  height: auto;
+}
+
+.sidebar-brand-text {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: 30px;
+  left: -40px;
+}
+
+/* Animações e ícones */
+.rubberBand {
+  animation-name: rubberBand;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+.card1 {
+  transition: transform 0.3s ease-in-out;
+}
+
+.card1:hover {
+  transform: scale(1.1);
+}
+
+.custom-button {
+  background-color: transparent;
+  color: #333;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  text-decoration: none !important;
+}
+
+.custom-button i {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+/* Outros estilos */
+.cardimg {
+  background-image: url("../img/fundo2.png");
+}
+
+.carousel-inner>.carousel-item>img {
+  width: 626px;
+  height: 939px;
+}
+
+.icar {
+  position: relative;
+  border-radius: 20%;
+  transform: translateX(50%);
+}
+
+.animacao {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  bottom: 30px;
+  right: 80px;
+  transform: translateX(50%);
+}
+
+#rockgif,
+#palacegif {
+  transform: translateX(50%);
+  width: 400px;
+  position: relative;
+  right: 200px;
+}
+
+#animacao2 {
+  position: relative;
+  padding: 0px;
+  width: 300px;
+  left: 250px;
+  transform: translateX(50%);
+}
+
+.frufru {
+  display: flex;
+  justify-content: space-between;
+  transform: translateX(30%);
+}
+
+@keyframes rubberBand {
+  0% {
+    transform: scale(1);
+  }
+
+  30% {
+    transform: scale(1.25);
+  }
+
+  40% {
+    transform: scale(0.95);
+  }
+
+  60% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
