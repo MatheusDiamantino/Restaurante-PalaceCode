@@ -30,8 +30,6 @@ if (!isset($_SESSION['usuario'])) {
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/x-icon" href="./img/palacelogo1.png" sizes="100x100">
-
-
     <title>Gerenciador Palacecode</title>
 
     <!-- Custom fonts for this template-->
@@ -39,74 +37,20 @@ if (!isset($_SESSION['usuario'])) {
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="css/dash1.css" rel="stylesheet">
+    <link href="css/dash.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-
-    <style>
-        @keyframes rubberBand {
-            0% {
-                transform: scale(1);
-            }
-
-            30% {
-                transform: scale(1.25);
-            }
-
-            40% {
-                transform: scale(0.95);
-            }
-
-            60% {
-                transform: scale(1.15);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .rubberBand {
-            animation-name: rubberBand;
-            animation-duration: 1s;
-            animation-timing-function: ease-in-out;
-        }
-
-        .card1 {
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .card1:hover {
-            transform: scale(1.1);
-        }
-
-        .custom-button {
-            background-color: transparent;
-            /* Fundo transparente */
-            color: #333;
-            /* Cor do texto (cinza escuro) */
-            border: none;
-            /* Remova a borda */
-            border-radius: 5px;
-            /* Borda arredondada */
-            padding: 10px 20px;
-            /* Espaçamento interno */
-            font-size: 16px;
-            /* Tamanho da fonte */
-            text-decoration: none !important;
-            /* Remova a decoração de texto */
-        }
-
-        .custom-button i {
-            font-size: 20px;
-            /* Tamanho do ícone */
-            margin-right: 5px;
-            /* Espaçamento à direita do ícone */
-        }
-    </style>
-
 </head>
 
 <body id="page-top ">
@@ -116,15 +60,16 @@ if (!isset($_SESSION['usuario'])) {
     <div id="wrapper">
 
         <!-- Sidebar -->
+        <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
-
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dash.php">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <img src="./img/logotcc.png">
+                <div class="sidebar-brand-icon rotate-n-15 ">
+                    <img class="logopalacio" src="./img/palacelogo1.png">
                 </div>
-                <div class="sidebar-brand-text mx-3">Rock Speto</div>
+                <div class="sidebar-brand-text mx-3 ">Palace Code</div>
             </a>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
@@ -249,26 +194,23 @@ if (!isset($_SESSION['usuario'])) {
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
-                        <!-- Nav Item - User Information -->
+                        <!-- User Information Dropdown -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $nomeUsuario; ?></span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg" alt="User Profile">
                             </a>
-                            <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="conta.php">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Perfil
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Perfil
                                 </a>
-
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Sair da conta
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Sair da conta
                                 </a>
                             </div>
                         </li>
+
 
                     </ul>
 
@@ -507,30 +449,135 @@ if (!isset($_SESSION['usuario'])) {
                     }
                     ?>
 
-
-
-
-
-                    <!-- Content Row -->
-                    <div class="row">
-
-                        <div class=" container  mb-4">
-
-                            <!-- Illustrations -->
-                            <div class="cardimg card1 shadow mb-4 p-2 m-5 ">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="container" id="rockgif" src="./img/gif1.gif">
-
-                                        <img class="container" id="palacegif" src="./img/gif2.gif">
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
+                    <!-- Tentativa para criar um gráfico! -->
+                    <hr class="sidebar-divider">
+                    <!-- Botão para alternar entre gráfico de linha e de barras -->
+                    <div class="form-group">
+                        <label for="chartTypeSelect">Selecione o Tipo de Gráfico:</label>
+                        <select class="form-control" id="chartTypeSelect">
+                            <option value="line">Gráfico de Linha</option>
+                            <option value="bar">Gráfico de Barras</option>
+                        </select>
                     </div>
+                    <!-- Canvas para o gráfico -->
+                    <div class="card cardGrafic" style="width: 80%; margin: 0 auto;">
+                        <canvas id="myChart"></canvas>
+                    </div>
+
+
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            var ctx = document.getElementById('myChart').getContext('2d');
+                            var currentChart = null;
+
+                            function createLineChart() {
+                                if (currentChart) {
+                                    currentChart.destroy(); // Destrua o gráfico atual, se existir
+                                }
+
+                                fetch('grafico_mensais.php')
+                                    .then(function(response) {
+                                        return response.json();
+                                    })
+                                    .then(function(data) {
+                                        var labels = data.map(function(item) {
+                                            return item.mes;
+                                        });
+
+                                        var salesData = data.map(function(item) {
+                                            return item.vendas;
+                                        });
+
+                                        var chartData = {
+                                            labels: labels,
+                                            datasets: [{
+                                                label: 'Vendas Mensais',
+                                                data: salesData,
+                                                borderColor: 'rgba(75, 192, 192, 1)',
+                                                borderWidth: 2,
+                                            }]
+                                        };
+
+                                        currentChart = new Chart(ctx, {
+                                            type: 'line',
+                                            data: chartData,
+                                            options: {
+                                                scales: {
+                                                    y: {
+                                                        beginAtZero: true
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    })
+                                    .catch(function(error) {
+                                        console.error('Erro ao buscar os dados do servidor:', error);
+                                    });
+                            }
+
+                            function createBarChart() {
+                                if (currentChart) {
+                                    currentChart.destroy(); // Destrua o gráfico atual, se existir
+                                }
+
+                                fetch('grafico_mensais.php')
+                                    .then(function(response) {
+                                        return response.json();
+                                    })
+                                    .then(function(data) {
+                                        var labels = data.map(function(item) {
+                                            return item.mes;
+                                        });
+
+                                        var salesData = data.map(function(item) {
+                                            return item.vendas;
+                                        });
+
+                                        var chartData = {
+                                            labels: labels,
+                                            datasets: [{
+                                                label: 'Vendas Mensais',
+                                                data: salesData,
+                                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                                borderColor: 'rgba(75, 192, 192, 1)',
+                                                borderWidth: 2,
+                                            }]
+                                        };
+
+                                        currentChart = new Chart(ctx, {
+                                            type: 'bar',
+                                            data: chartData,
+                                            options: {
+                                                scales: {
+                                                    y: {
+                                                        beginAtZero: true
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    })
+                                    .catch(function(error) {
+                                        console.error('Erro ao buscar os dados do servidor:', error);
+                                    });
+                            }
+
+                            createLineChart(); // Inicialmente, crie o gráfico de linha
+
+                            document.getElementById('chartTypeSelect').addEventListener('change', function() {
+                                var selectedChartType = this.value;
+
+                                if (currentChart) {
+                                    currentChart.destroy(); // Destrua o gráfico atual, se existir
+                                }
+
+                                if (selectedChartType === 'line') {
+                                    createLineChart();
+                                } else if (selectedChartType === 'bar') {
+                                    createBarChart();
+                                }
+                            });
+                        });
+                    </script>
 
                 </div>
                 <!-- /.container-fluid -->
