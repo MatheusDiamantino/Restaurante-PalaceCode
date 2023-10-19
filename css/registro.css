@@ -1,0 +1,107 @@
+/* Estilos personalizados */
+
+
+
+.corpitio {
+    background-image: url("../img/fundo2.png");    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#palace {
+    max-width: 250px;
+    background-size: 100%;
+}
+
+#rock {
+    max-width: 200px;
+    background-size: 100%;
+    background-color: black;
+    border-radius: 20%;
+}
+
+.card {
+    border-radius: 10px;
+    background-image: url("../img/fundom.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.text-gray-900 {
+    color: #343a40 !important;
+}
+
+.form-control-user {
+    border-radius: 25px;
+}
+
+.btn-light {
+    font-weight: bold;
+    background-color: #f8f9fc;
+    color: black !important; 
+    border-color: black;
+    
+}
+
+.btn-light:hover {
+    background-color: #e47208;
+    color: white !important;
+    
+    
+}
+
+/* Outros estilos */
+
+body {
+    
+    background-color: #fff;
+    
+}
+
+h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.container {
+    padding-top: 4rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.col-sm-6.mb-3.mb-sm-0 {
+    margin-bottom: 0 !important;
+}
+
+.select {
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+}
+
+.btn {
+    border-radius: 25px;
+    padding: 0.75rem 1.5rem;
+}
+
+/* Adição de estilos para posicionar as logos lado a lado */
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo-container img {
+    max-width: 150px;
+    height: auto;
+    margin: 0 10px;
+}
+
+

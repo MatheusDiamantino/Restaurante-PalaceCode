@@ -1,0 +1,12 @@
+
+body{
+    background-image: url("../img/fundo2.png");    color: black;
+}
+
+#imagem{
+    display: flex;
+    
+    width: 38%;
+    height: 60%;
+    background-color: black;
+}

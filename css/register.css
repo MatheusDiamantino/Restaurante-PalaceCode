@@ -1,0 +1,20 @@
+.corpitio{
+    background-image: url("../img/fundo2.png");}
+
+
+
+#palace{
+    width: 100px;
+}
+
+#rock{
+    width: 350px;
+
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 30px;
+  }
