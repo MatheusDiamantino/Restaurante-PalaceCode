@@ -8,15 +8,8 @@
 }
 
 #palace {
-    max-width: 250px;
+    max-width: 300px;
     background-size: 100%;
-}
-
-#rock {
-    max-width: 200px;
-    background-size: 100%;
-    background-color: black;
-    border-radius: 20%;
 }
 
 .card {

@@ -92,10 +92,10 @@ if ($_SESSION['OCUPACAO'] !== 'Admin') {
         <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dash.php">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <img id="img" src="./img/logotcc.png" class="logo-tcc">
+                <div class="sidebar-brand-icon rotate-n-15 ">
+                    <img class="logopalacio" src="./img/palacelogo1.png">
                 </div>
-                <div class="sidebar-brand-text mx-3">Rock Speto</div>
+                <div class="sidebar-brand-text mx-3 ">Palace Code</div>
             </a>
 
             <!-- Divider -->

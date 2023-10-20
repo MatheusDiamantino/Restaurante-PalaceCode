@@ -1,4 +1,31 @@
-
+/* Logo e banner */
+.logopalacio {
+    transform: rotate(15deg);
+    position: relative;
+    left: -10px;
+    top: 30px;
+  }
+  
+  
+  /* Sidebar e sidebar-brand */
+  .sidebar-brand {
+    margin-bottom: 50px;
+    position: relative;
+  }
+  
+  .sidebar-brand-icon img {
+    width: 150px;
+    height: auto;
+  }
+  
+  .sidebar-brand-text {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 30px;
+    left: -40px;
+  }
+  
 .fundo-2{
     background-image: url("../img/fundo2.png");    
   }
