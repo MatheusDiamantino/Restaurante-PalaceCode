@@ -53,7 +53,7 @@ if ($_SESSION['OCUPACAO'] !== 'Admin') {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.6/jquery.inputmask.min.js"></script>
     <!-- Custom styles for this template -->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="css/registro.css" rel="stylesheet">
+    <link href="css/cadastro.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
 
@@ -111,7 +111,6 @@ if ($_SESSION['OCUPACAO'] !== 'Admin') {
                         <div class="row">
                             <div class="col-lg-12 text-center">
                                 <img id="palace" src="./img/palacelogo1.png" alt="Logo Palace">
-                                <img id="rock" src="./img/logotcc.png" alt="Logo Rock">
                             </div>
                         </div>
 

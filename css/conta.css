@@ -1,0 +1,47 @@
+body {
+    background-image: url("../img/fundo2.png");
+    overflow: hidden;
+    /* Remova a barra de rolagem */
+}
+
+.col1 {
+    background-image: url(/img/noitees.gif);
+}
+
+img {
+    padding: 20px;
+    margin-left: 50px;
+}
+
+.col-lg-7 {
+    background-image: url(../img/bg2.png);
+    max-height: 600px;
+    /* Defina a altura desejada */
+    overflow-y: auto;
+    /* Adicione uma barra de rolagem caso o conteúdo exceda a altura */
+}
+
+#palace {
+    width: 500px;
+    display: block;
+    /* Torna a imagem um elemento de bloco para alinhar horizontalmente */
+    margin: 0 auto;
+    /* Define as margens automática para alinhamento horizontal */
+    text-align: center;
+    position: relative;
+    right: 20px;
+}
+
+
+.edit-f {
+    position: relative;
+    left: 30px;
+    border-radius: 10px;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 30px;
+}

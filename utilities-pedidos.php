@@ -78,10 +78,10 @@ if (!isset($_SESSION['usuario'])) {
         <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dash.php">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <img src="./img/logotcc.png" id="imagem" class="logo-tcc" onmouseover="aumentarImagem()" onmouseout="diminuirImagem()">
+                <div class="sidebar-brand-icon rotate-n-15 ">
+                    <img class="logopalacio" src="./img/palacelogo1.png">
                 </div>
-                <div class="sidebar-brand-text mx-2">Rock Speto</div>
+                <div class="sidebar-brand-text mx-3 ">Palace Code</div>
             </a>
 
             <!-- Divider -->

@@ -30,7 +30,7 @@ if (!isset($_SESSION['usuario'])) {
     <title>Gerenciador PalaceCode</title>
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="css/perfil.css" rel="stylesheet">
+    <link href="css/conta.css" rel="stylesheet">
 
 </head>
 
@@ -42,7 +42,6 @@ if (!isset($_SESSION['usuario'])) {
                 <div class="row">
                     <div class="col1 col-lg-5 d-none d-lg-block" style="background-color: gray">
                         <img id="palace" src="./img/palacelogo1.png">
-                        <img id="rock" src="./img/logotcc.png">
                     </div>
                     <div class="col-lg-7">
                         <div class="p-5" >

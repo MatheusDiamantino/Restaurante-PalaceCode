@@ -36,7 +36,7 @@ if ($_SESSION['OCUPACAO'] !== 'Admin') {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="css/mesas.css" rel="stylesheet">
+    <link href="css/mesa.css" rel="stylesheet">
 
 
     <title>Gerenciador PalaceCode</title>
@@ -63,6 +63,11 @@ if ($_SESSION['OCUPACAO'] !== 'Admin') {
             width: 200px;
             text-align: center;
             background-color: #f9f9f9;
+            position: relative;
+            transition: transform 0.2s;
+            /* Adiciona uma transição suave */
+            overflow: hidden;
+            /* Para esconder o conteúdo que se estenderá além da mesa */
         }
 
         .mesa img {
@@ -80,7 +85,32 @@ if ($_SESSION['OCUPACAO'] !== 'Admin') {
         .mesa-acao {
             margin-top: 10px;
         }
+
+        .tooltip {
+            visibility: hidden;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .mesa:hover {
+            transform: scale(1.1);
+            /* Aumenta a escala da mesa quando o mouse está sobre ela */
+            backdrop-filter: blur(5px);
+            /* Aplica um desfoque no fundo */
+        }
+
+        .mesa:hover .tooltip {
+            visibility: visible;
+        }
     </style>
+
+
 
 </head>
 
@@ -94,10 +124,10 @@ if ($_SESSION['OCUPACAO'] !== 'Admin') {
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="dash.php">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <img class="logo-tcc" src="./img/logotcc.png">
+                <div class="sidebar-brand-icon rotate-n-15 ">
+                    <img class="logopalacio" src="./img/palacelogo1.png">
                 </div>
-                <div class="sidebar-brand-text mx-3">Rock Speto</div>
+                <div class="sidebar-brand-text mx-3 ">Palace Code</div>
             </a>
 
             <!-- Divider -->
@@ -260,23 +290,23 @@ if ($_SESSION['OCUPACAO'] !== 'Admin') {
                     <h1 class="h3 mb-2 text-dark text">Mesas</h1>
 
                     <!-- Tabela Mesa -->
-
-                    <div class="nav-2 card-header py-3 d-flex justify-content-around">
-
-
-                        <div>
-                            <!-- Button trigger modal -->
-                            <div>
-                                <a type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: relative;
-                                    left: 450px;"><i class="bi bi-clipboard2-plus-fill">Cadastrar mesas</i></a>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="nav-2 card-header py-3 d-flex justify-content-between">
+                                <div>
+                                    <!-- Button trigger modal para cadastrar mesas -->
+                                    <a type="button" class="btn btn-dark" style="position: relative; left: 80%;" data-bs-toggle="modal" data-bs-target="#cadastrarMesaModal">
+                                        <i class="bi bi-clipboard2-plus-fill"></i> Cadastrar mesas
+                                    </a>
+                                </div>
                             </div>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <!-- Modal para cadastrar mesas -->
+                            <div class="modal fade" id="cadastrarMesaModal" tabindex="-1" aria-labelledby="cadastrarMesaModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h2 class="modal-title fs-3 fw-bolder" id="exampleModalLabel">Cadastrar mesas</h2>
+                                            <h2 class="modal-title fs-3 fw-bolder" id="cadastrarMesaModalLabel">Cadastrar mesas</h2>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
@@ -296,110 +326,211 @@ if ($_SESSION['OCUPACAO'] !== 'Admin') {
                                     </div>
                                 </div>
                             </div>
-
-
-
-
                         </div>
-                    </div>
 
+                        <div class="col-md-6">
+                            <div class="nav-2 card-header py-3 d-flex justify-content-between">
+                                <div>
+                                    <!-- Button trigger modal para reservar mesas -->
+                                    <a type="button" class="btn btn-dark" style="position: relative; left: 80%;" data-bs-toggle="modal" data-bs-target="#reservarMesaModal">
+                                        <i class="bi bi-clipboard-plus"></i> Reservar Mesas Manutenção
+                                    </a>
+                                </div>
+                            </div>
 
-                    
-                    <div class="card shadow mb-4">
-                        <div class="card-body">
-                            <div class="mesas">
-                                <?php
-                                // Continue com o restante do código
-                                include './conexao/config.php';
+                            <!-- Modal para reservar mesas -->
+                            <div class="modal fade" id="reservarMesaModal" tabindex="-1" aria-labelledby="reservarMesaModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h2 class="modal-title fs-3 fw-bolder" id="reservarMesaModalLabel">Reservar Mesas</h2>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form method="POST" action="reservar_mesas.php">
+                                                <div class="mb-3">
+                                                    <label for="numero_mesa" class="form-label">Número da Mesa:</label>
+                                                    <input type="number" name="numero_mesa" class="form-control" placeholder="Digite o número da mesa">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="data_reserva" class="form-label">Data da Reserva:</label>
+                                                    <input type="date" name="data_reserva" class="form-control">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="hora_reserva" class="form-label">Hora da Reserva:</label>
+                                                    <input type="time" name="hora_reserva" class="form-control">
+                                                </div>
 
-                                try {
-                                    // Cria uma nova conexão PDO
-                                    $query = "SELECT id_mesa as id, numero_mesa as mesa, situacao FROM mesas WHERE situacao = 'ATIVO'";
-                                    $stmt = $conn->prepare($query);
-                                    $stmt->execute();
-                                    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                                    foreach ($results as $row4) {
-                                        echo '<div class="mesa">';
-                                        echo '<img src="./img/mesa.png" alt="Mesa">';
-                                        echo '<div class="mesa-info">';
-                                        echo 'ID: ' . $row4['id'];
-                                        echo '</div>';
-                                        echo '<div class="mesa-info">';
-                                        echo 'Nº Mesa: ' . $row4['mesa'];
-                                        echo '</div>';
-                                        echo '<div class="mesa-acao">';
-                                        echo '<a href="deletar_mesa.php?id=' . $row4['id'] . '" class="btn btn-outline-danger"><i class="bi bi-trash3-fill"></i></a>';
-                                        echo '</div>';
-                                        echo '</div>';
-                                    }
-                                } catch (PDOException $e) {
-                                    echo "Erro na conexão: " . $e->getMessage();
-                                }
-                                ?>
+                                                <!-- O botão de envio deve estar dentro do formulário -->
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                    <button type="submit" class="btn btn-dark">Reservar Mesa</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-
-
-                    <!-- /.container-fluid -->
-
                 </div>
-                <!-- End of Main Content -->
-                <!-- End of Main Content -->
 
-                <!-- Footer -->
-                <footer class="sticky-footer ">
 
-                    <div class="copyright text-center my-auto">
-                        <span>Palacecode &copy; site desenvolvido 2023</span>
+
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="mesas">
+                            <?php
+                            // Continue com o restante do código
+                            include './conexao/config.php';
+
+                            try {
+                                // Cria uma nova conexão PDO
+                                $query = "SELECT id_mesa as id, numero_mesa as mesa, situacao, statusMesa FROM mesas WHERE situacao = 'ATIVO'";
+                                $stmt = $conn->prepare($query);
+                                $stmt->execute();
+                                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                foreach ($results as $row4) {
+                                    echo '<div class="mesa">';
+                                    echo '<div>';
+
+                                    // Adicione o botão "X" para excluir a mesa
+                                    echo '<a href="#" class="btn-excluir text-dark" style="position:absolute; left: 10%" data-toggle="modal" data-target="#confirmDeleteModal' . $row4['id'] . '"><i class="fa fa-trash"></i></a>';
+
+                                    echo '</div>';
+                                    echo '<img src="./img/mesa.png" alt="Mesa">';
+
+                                    echo '<div class="mesa-info">';
+                                    echo 'ID: ' . $row4['id'];
+                                    echo '</div>';
+                                    echo '<div class="mesa-info">';
+                                    echo 'Nº Mesa: ' . $row4['mesa'];
+                                    echo '</div>';
+
+                                    echo '<div class="mesa-acao">';
+
+                                    // Verifique se há pedidos ativos relacionados a essa mesa
+                                    $idMesa = $row4['id'];
+                                    $queryPedidos = "SELECT COUNT(*) as total_pedidos FROM Pedidos WHERE id_mesa = :id_mesa AND situacao = 'ATIVO'";
+                                    $stmtPedidos = $conn->prepare($queryPedidos);
+                                    $stmtPedidos->bindParam(':id_mesa', $idMesa);
+                                    $stmtPedidos->execute();
+                                    $totalPedidos = $stmtPedidos->fetchColumn();
+
+                                    if ($totalPedidos > 0) {
+                                        // Há pedidos ativos relacionados a esta mesa
+                                        echo '<div class="status-mesa ocupada">Ocupada</div>';
+
+                                        // Modificar o campo statusMesa para "Ocupada"
+                                        $updateStatusMesa = $conn->prepare("UPDATE mesas SET statusMesa = 'Ocupada' WHERE id_mesa = :id_mesa");
+                                        $updateStatusMesa->bindParam(':id_mesa', $idMesa);
+                                        $updateStatusMesa->execute();
+                                    } else {
+                                        // Não há pedidos ativos relacionados a esta mesa
+                                        echo '<div class="status-mesa disponivel">Disponível</div>';
+
+                                        // Modificar o campo statusMesa para "Disponível"
+                                        $updateStatusMesa = $conn->prepare("UPDATE mesas SET statusMesa = 'Disponível' WHERE id_mesa = :id_mesa");
+                                        $updateStatusMesa->bindParam(':id_mesa', $idMesa);
+                                        $updateStatusMesa->execute();
+                                    }
+
+
+                                    echo '</div>';
+                                    echo '</div>';
+
+                                    // Crie o modal de confirmação para a mesa
+                                    echo '<div class="modal fade" id="confirmDeleteModal' . $row4['id'] . '" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">';
+                                    echo '<div class="modal-dialog" role="document">';
+                                    echo '<div class="modal-content">';
+                                    echo '<div class="modal-header">';
+                                    echo '<h5 class="modal-title" id="confirmDeleteModalLabel">Confirmação</h5>';
+                                    echo '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">';
+                                    echo '<span aria-hidden="true">&times;</span>';
+                                    echo '</button>';
+                                    echo '</div>';
+                                    echo '<div class="modal-body">';
+                                    echo 'Tem certeza de que deseja excluir esta mesa?';
+                                    echo '</div>';
+                                    echo '<div class="modal-footer">';
+                                    echo '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>';
+                                    echo '<a href="deletar_mesa.php?id=' . $row4['id'] . '" class="btn btn-danger">Excluir</a>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                }
+                            } catch (PDOException $e) {
+                                echo "Erro na conexão: " . $e->getMessage();
+                            }
+                            ?>
+
+
+
+
+
+                        </div>
                     </div>
+                </div>
 
-                </footer>
-                <!-- End of Footer -->
+                <!-- /.container-fluid -->
 
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Main Content -->
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer ">
+
+                <div class="copyright text-center my-auto">
+                    <span>Palacecode &copy; site desenvolvido 2023</span>
+                </div>
+
+            </footer>
+            <!-- End of Footer -->
 
         </div>
-        <!-- End of Page Wrapper -->
+        <!-- End of Content Wrapper -->
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    </div>
+    <!-- End of Page Wrapper -->
 
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Selecione "Sair" abaixo se você está pronto para encerrar sua sessão</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                        <a class="btn btn-dark" href="index.php">Sair</a>
-                    </div>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Selecione "Sair" abaixo se você está pronto para encerrar sua sessão</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <a class="btn btn-dark" href="index.php">Sair</a>
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <script type="text/javascript" src="js/mesas.js"></script>
-        <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="js/mesas.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
 
 
 </body>
