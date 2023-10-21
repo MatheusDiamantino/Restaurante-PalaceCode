@@ -12,6 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+        $statusMesa = 'DISPONIVEL';  // Defina o status como "Disponível"
+
         $checkStmt = $conn->prepare("SELECT * FROM mesas WHERE numero_mesa = :mesa");
         $checkStmt->bindParam(':mesa', $mesa);
         $checkStmt->execute();
@@ -19,10 +21,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($existingMesa) {
             if ($existingMesa['situacao'] == 'INATIVO') {
-                $updateStmt = $conn->prepare("UPDATE mesas SET situacao = 'ATIVO' WHERE numero_mesa = :mesa");
+                $updateStmt = $conn->prepare("UPDATE mesas SET situacao = 'ATIVO', statusMesa = :statusMesa, data_reserva = NULL, hora_reserva = NULL WHERE numero_mesa = :mesa");
                 $updateStmt->bindParam(':mesa', $mesa);
+                $updateStmt->bindParam(':statusMesa', $statusMesa);
                 if ($updateStmt->execute()) {
-                    echo "A mesa já existe, mas a situação foi atualizada para ATIVO.";
+                    echo "A mesa já existe, mas a situação foi atualizada para ATIVO e status definido como Disponível.";
                 } else {
                     echo "Erro ao atualizar a situação da mesa.";
                 }
@@ -30,10 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "A mesa já existe e está ATIVA.";
             }
         } else {
-            $insertStmt = $conn->prepare("INSERT INTO mesas (numero_mesa, situacao) VALUES (:mesa, 'DISPONIVEL')");
+            $insertStmt = $conn->prepare("INSERT INTO mesas (numero_mesa, situacao, statusMesa, data_reserva, hora_reserva) VALUES (:mesa, 'DISPONIVEL', :statusMesa, NULL, NULL");
             $insertStmt->bindParam(':mesa', $mesa);
+            $insertStmt->bindParam(':statusMesa', $statusMesa);
             if ($insertStmt->execute()) {
-                echo "Mesa criada com sucesso!";
+                echo "Mesa criada com sucesso com status Disponível.";
             } else {
                 echo "Erro ao inserir a mesa.";
             }
