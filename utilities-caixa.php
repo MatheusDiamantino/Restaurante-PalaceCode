@@ -38,7 +38,7 @@ if ($_SESSION['OCUPACAO'] !== 'Admin') {
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="css/index.css" rel="stylesheet">
-    <link href="css/caixa.css" rel="stylesheet">
+    <link href="css/caixapag.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 
     <title>Gerenciador Palacecode</title>

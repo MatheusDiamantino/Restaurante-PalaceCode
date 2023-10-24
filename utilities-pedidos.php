@@ -31,7 +31,7 @@ if (!isset($_SESSION['usuario'])) {
 
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="css/pedidos.css" rel="stylesheet">
+    <link href="css/pedido.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
@@ -232,7 +232,6 @@ if (!isset($_SESSION['usuario'])) {
                 <!-- End of Topbar -->
                 <div class="container">
                     <h1 class="h1 mb-4 text-dark">Pedidos</h1>
-
                     <?php
                     include './conexao/config.php';
 

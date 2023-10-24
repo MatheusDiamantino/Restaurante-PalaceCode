@@ -276,17 +276,19 @@ if (!isset($_SESSION['usuario'])) {
                                                 $conn = new PDO("mysql:host=$hostname;dbname=$database", $username, $password);
                                                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                                                $query = "SELECT COUNT(*) as pedidos_ativos FROM Pedidos WHERE situacao = 'ATIVO'";
+                                                $query = "SELECT COUNT(DISTINCT id_mesa) as mesas_com_pedidos FROM Pedidos WHERE situacao = 'ATIVO' AND id_mesa IS NOT NULL";
                                                 $stmt = $conn->query($query);
                                                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                                                $pedidos_ativos = $result['pedidos_ativos'];
+                                                $mesas_com_pedidos = $result['mesas_com_pedidos'];
 
-                                                echo '<div class="h5 mb-0 font-weight-bold text-gray-800">' . number_format($pedidos_ativos) . '</div>';
+                                                echo '<div class="h5 mb-0 font-weight-bold text-gray-800">' . number_format($mesas_com_pedidos) . '</div>';
                                             } catch (PDOException $e) {
                                                 echo "Erro na conexão: " . $e->getMessage();
                                             }
                                             ?>
+
+
                                         </div>
                                         <div class="col-auto">
                                             <i class="bi bi-list-check fa-2x text-info"></i>
@@ -641,3 +643,5 @@ if (!isset($_SESSION['usuario'])) {
 </body>
 
 </html>
+
+
