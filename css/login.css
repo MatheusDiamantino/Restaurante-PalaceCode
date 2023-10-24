@@ -1,7 +1,4 @@
-img{
-  width: 70px;
-  transform: rotate(10deg);
-}
+
 
 .login {
   color: #000;
@@ -138,7 +135,7 @@ img{
 
 .logo {
   position: absolute;
-  top: -5%;
+  top: -4.5%;
   left: 50%;
   transform: translateX(-50%);
   width: 250px;

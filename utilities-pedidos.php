@@ -38,34 +38,33 @@ if (!isset($_SESSION['usuario'])) {
     <script type="text/javascript" src="js/pedido.js"></script>
 
     <style>
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+            }
 
-@keyframes scaleUp {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.05);
-    }
-}
+            to {
+                opacity: 1;
+            }
+        }
 
-.fadeInDownTable {
-    animation: fadeInDown 1s ease-in-out;
-}
+        @keyframes scaleUp {
+            from {
+                transform: scale(1);
+            }
 
-.scaleUpTable:hover {
-    animation: scaleUp 0.3s ease-in-out;
-}
+            to {
+                transform: scale(1.05);
+            }
+        }
 
+        .fadeInDownTable {
+            animation: fadeInDown 1s ease-in-out;
+        }
 
-
+        .scaleUpTable:hover {
+            animation: scaleUp 0.3s ease-in-out;
+        }
     </style>
 </head>
 
@@ -232,29 +231,47 @@ if (!isset($_SESSION['usuario'])) {
                 </nav>
                 <!-- End of Topbar -->
                 <div class="container">
-    <h1 class="h1 mb-4 text-dark">Pedidos</h1>
+                    <h1 class="h1 mb-4 text-dark">Pedidos</h1>
 
                     <?php
                     include './conexao/config.php';
 
                     try {
-                        // Cria uma nova conexão PDO
+                        // Recupere pedidos ativos do banco de dados
                         $query = "SELECT 
-                        p.ID_Pedido AS id_pedido,
-                        m.numero_mesa,
-                        c.nome AS nome_cardapio,
-                        p.valorTotal AS total,
-                        p.descricao AS descricao,
-                        p.quantidade AS qtd,
-                        p.situacao,
-                        p.ID_FUNC
-                    FROM Pedidos p
-                    INNER JOIN mesas m ON p.id_mesa = m.id_mesa
-                    INNER JOIN cardapio c ON p.ID_CARDAPIO = c.ID_CARDAPIO
-                    WHERE p.situacao = 'ATIVO';
-";
+        p.ID_Pedido AS id_pedido,
+        m.numero_mesa,
+        c.nome AS nome_cardapio,
+        p.valorTotal AS total,
+        p.descricao AS descricao,
+        p.quantidade AS qtd,
+        p.situacao,
+        p.ID_FUNC,
+        p.timestamp  -- Adicione a coluna data_hora
+    FROM Pedidos p
+    INNER JOIN mesas m ON p.id_mesa = m.id_mesa
+    INNER JOIN cardapio c ON p.ID_CARDAPIO = c.ID_CARDAPIO
+    WHERE p.situacao = 'ATIVO';";
+
                         $stmt = $conn->query($query);
                         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                        // Obtenha a data e hora atual
+                        $dataAtual = date('Y-m-d H:i:s');
+
+                        // Atualize a situação dos pedidos que estão ativos há mais de 1 dia
+                        foreach ($results as $row3) {
+                            $dataPedido = $row3['timestamp'];
+                            $intervalo = strtotime($dataAtual) - strtotime($dataPedido);
+                            $diasPassados = floor($intervalo / (60 * 60 * 24));
+
+                            if ($diasPassados >= 1) {
+                                // Defina a situação como "INATIVO" se o pedido estiver ativo há mais de 1 dia
+                                $pedidoID = $row3['id_pedido'];
+                                $updateQuery = "UPDATE Pedidos SET situacao = 'INATIVO' WHERE ID_Pedido = $pedidoID";
+                                $conn->exec($updateQuery);
+                            }
+                        }
                     } catch (PDOException $e) {
                         echo "Erro na conexão: " . $e->getMessage();
                     }
@@ -272,77 +289,78 @@ if (!isset($_SESSION['usuario'])) {
                     }
                     ?>
 
-<div class="row">
-        <?php foreach ($pedidos_por_mesa as $numero_mesa => $pedidos) { ?>
-            <div class="col-lg-6 col-md-12 mb-4">
-                <div class="card shadow animate__animated animate__fadeIn">
-                    <div class="card-header bg-primary text-white">
-                        <h6 class="m-0 font-weight-bold">Mesa <?php echo $numero_mesa; ?></h6>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-bordered mb-0 fadeInDownTable"> <!-- Adicione a classe fadeInDownTable apenas à tabela -->
-                            <tr>
-                                <th>Combo</th>
-                                <th>Descrição</th>
-                                <th>Quantidade</th>
-                                <th>Status</th>
-                            </tr>
-                            <?php foreach ($pedidos as $pedido) { ?>
-                                <tr>
-                                    <td><?php echo $pedido['nome_cardapio']; ?></td>
-                                    <td><?php echo $pedido['descricao']; ?></td>
-                                    <td><?php echo $pedido['qtd']; ?></td>
-                                    <td><?php echo $pedido['situacao']; ?></td>
-                                </tr>
-                            <?php } ?>
-                        </table>
+
+                    <div class="row">
+                        <?php foreach ($pedidos_por_mesa as $numero_mesa => $pedidos) { ?>
+                            <div class="col-lg-6 col-md-12 mb-4">
+                                <div class="card shadow animate__animated animate__fadeIn">
+                                    <div class="card-header bg-primary text-white">
+                                        <h6 class="m-0 font-weight-bold">Mesa <?php echo $numero_mesa; ?></h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <table class="table table-bordered mb-0 fadeInDownTable"> <!-- Adicione a classe fadeInDownTable apenas à tabela -->
+                                            <tr>
+                                                <th>Combo</th>
+                                                <th>Descrição</th>
+                                                <th>Quantidade</th>
+                                                <th>Status</th>
+                                            </tr>
+                                            <?php foreach ($pedidos as $pedido) { ?>
+                                                <tr>
+                                                    <td><?php echo $pedido['nome_cardapio']; ?></td>
+                                                    <td><?php echo $pedido['descricao']; ?></td>
+                                                    <td><?php echo $pedido['qtd']; ?></td>
+                                                    <td><?php echo $pedido['situacao']; ?></td>
+                                                </tr>
+                                            <?php } ?>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
-            </div>
-        <?php } ?>
-    </div>
-</div>
 
 
 
 
 
-                    <!-- End of Page Wrapper -->
+                <!-- End of Page Wrapper -->
 
-                    <!-- Scroll to Top Button-->
-                    <a class="scroll-to-top rounded" href="#page-top">
-                        <i class="fas fa-angle-up"></i>
-                    </a>
+                <!-- Scroll to Top Button-->
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fas fa-angle-up"></i>
+                </a>
 
-                    <!-- Logout Modal-->
-                    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
-                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">Selecione "Sair" abaixo se você está pronto para encerrar sua sessão</div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                                    <a class="btn btn-dark" href="index.php">Sair</a>
-                                </div>
+                <!-- Logout Modal-->
+                <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Selecione "Sair" abaixo se você está pronto para encerrar sua sessão</div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                <a class="btn btn-dark" href="index.php">Sair</a>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Bootstrap core JavaScript-->
-                    <script type="text/javascript" src="js/pedido.js"></script>
-                    <script src="vendor/jquery/jquery.min.js"></script>
-                    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                <!-- Bootstrap core JavaScript-->
+                <script type="text/javascript" src="js/pedido.js"></script>
+                <script src="vendor/jquery/jquery.min.js"></script>
+                <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-                    <!-- Core plugin JavaScript-->
-                    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+                <!-- Core plugin JavaScript-->
+                <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-                    <!-- Custom scripts for all pages-->
-                    <script src="js/sb-admin-2.min.js"></script>
+                <!-- Custom scripts for all pages-->
+                <script src="js/sb-admin-2.min.js"></script>
 
 </body>
 

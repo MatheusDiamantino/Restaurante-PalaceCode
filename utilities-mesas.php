@@ -58,6 +58,11 @@ if ($_SESSION['OCUPACAO'] !== 'Admin' && $_SESSION['OCUPACAO'] !== 'Atendente' &
             gap: 20px;
         }
 
+        .hidden {
+            display: none;
+        }
+
+
         .mesa-reservada {
             margin-top: 10px;
             font-size: 14px;
@@ -309,216 +314,277 @@ if ($_SESSION['OCUPACAO'] !== 'Admin' && $_SESSION['OCUPACAO'] !== 'Atendente' &
 
                     <!-- Tabela Mesa -->
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="nav-2 card-header py-3 d-flex justify-content-between">
                                 <div>
                                     <!-- Button trigger modal para cadastrar mesas -->
-                                    <a type="button" class="btn btn-dark" style="position: relative; left: 80%;" data-bs-toggle="modal" data-bs-target="#cadastrarMesaModal">
+                                    <a type="button" class="btn btn-dark" style="position: relative; left:40%" data-bs-toggle="modal" data-bs-target="#cadastrarMesaModal">
                                         <i class="bi bi-clipboard2-plus-fill"></i> Cadastrar mesas
                                     </a>
                                 </div>
                             </div>
-
-                            <!-- Modal para cadastrar mesas -->
-                            <div class="modal fade" id="cadastrarMesaModal" tabindex="-1" aria-labelledby="cadastrarMesaModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h2 class="modal-title fs-3 fw-bolder" id="cadastrarMesaModalLabel">Cadastrar mesas</h2>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="POST" action="insert_mesa.php">
-                                                <div class="mb-3">
-                                                    <label for="mesa" class="form-label">Número da Mesa:</label>
-                                                    <input type="number" name="mesa" class="form-control" placeholder="Digite o número da mesa">
-                                                </div>
-
-                                                <!-- O botão de envio deve estar dentro do formulário -->
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                    <button type="submit" class="btn btn-dark">Salvar alterações</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="nav-2 card-header py-3 d-flex justify-content-between">
                                 <div>
                                     <!-- Button trigger modal para reservar mesas -->
-                                    <a type="button" class="btn btn-dark" style="position: relative; left: 80%;" data-bs-toggle="modal" data-bs-target="#reservarMesaModal">
+                                    <a type="button" class="btn btn-dark" style="position: relative; left:50%" data-bs-toggle="modal" data-bs-target="#reservarMesaModal">
                                         <i class="bi bi-clipboard-plus"></i> Reservar Mesas
                                     </a>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Modal para reservar mesas -->
-                            <div class="modal fade" id="reservarMesaModal" tabindex="-1" aria-labelledby="reservarMesaModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h2 class="modal-title fs-3 fw-bolder" id="reservarMesaModalLabel">Reservar Mesas</h2>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form method="POST" action="reservar_mesas.php">
-                                                <div class="mb-3">
-                                                    <label for="numero_mesa" class="form-label">Número da Mesa:</label>
-                                                    <input type="number" name="numero_mesa" class="form-control" placeholder="Digite o número da mesa">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="data_reserva" class="form-label">Data da Reserva:</label>
-                                                    <input type="date" name="data_reserva" class="form-control">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="hora_reserva" class="form-label">Hora da Reserva:</label>
-                                                    <input type="time" name="hora_reserva" class="form-control">
-                                                </div>
-
-                                                <!-- O botão de envio deve estar dentro do formulário -->
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                    <button type="submit" class="btn btn-dark">Reservar Mesa</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
+                        <div class="col-md-4">
+                            <div class="nav-2 card-header py-3 d-flex justify-content-between">
+                                <div>
+                                    <!-- Button trigger modal para visualizar o histórico de reservas -->
+                                    <a type="button" class="btn btn-dark" style="position: relative; left:30%" data-bs-toggle="modal" data-bs-target="#historicoReservasModal">
+                                        <i class="bi bi-journal-text"></i> Histórico de Reservas
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Modal para cadastrar mesas -->
+                <div class="modal fade" id="cadastrarMesaModal" tabindex="-1" aria-labelledby="cadastrarMesaModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title fs-3 fw-bolder" id="cadastrarMesaModalLabel">Cadastrar mesas</h2>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="insert_mesa.php">
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <label for="mesa" class="form-label">Número da Mesa:</label>
+                                            <input type="number" name="mesa" class="form-control" placeholder="Digite o número da mesa" required>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-dark">Salvar alterações</button>
+                                    </div>
+                                </form>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal para reservar mesas -->
+                <div class="modal fade" id="reservarMesaModal" tabindex="-1" aria-labelledby="reservarMesaModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title fs-3 fw-bolder" id="reservarMesaModalLabel">Reservar Mesas</h2>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="reservar_mesas.php">
+                                    <div class="mb-3">
+                                        <label for="numero_mesa" class="form-label">Número da Mesa:</label>
+                                        <input type="number" name="numero_mesa" class="form-control" placeholder="Digite o número da mesa">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="data_reserva" class="form-label">Data da Reserva:</label>
+                                        <input type="date" name="data_reserva" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="hora_reserva" class="form-label">Hora da Reserva:</label>
+                                        <input type="time" name="hora_reserva" class="form-control">
+                                    </div>
+
+                                    <!-- O botão de envio deve estar dentro do formulário -->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        <button type="submit" class="btn btn-dark">Reservar Mesa</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal para apresentar histórico de reservas de mesas -->
+                <div class="modal fade" id="historicoReservasModal" tabindex="-1" aria-labelledby="historicoReservasModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2 class="modal-title fs-3 fw-bolder" id="historicoReservasModalLabel">Histórico de Reservas</h2>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Conteúdo do histórico de reservas aqui -->
+                                <!-- Você pode adicionar tabelas, listas ou qualquer conteúdo relevante sobre o histórico de reservas. -->
+                                <!-- Por exemplo: -->
+                                <!-- Conteúdo do histórico de reservas aqui -->
+                                <!-- Você pode adicionar tabelas, listas ou qualquer conteúdo relevante sobre o histórico de reservas. -->
+                                <!-- Por exemplo: -->
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Data da Reserva</th>
+                                            <th>Hora da Reserva</th>
+                                            <th>Número da Mesa</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        include './conexao/config.php';
+
+                                        $query = "SELECT id_mesa as id, numero_mesa as mesa, situacao, statusMesa, data_reserva as dia, hora_reserva as hora FROM mesas WHERE id_mesa > 0 AND data_reserva IS NOT NULL AND hora_reserva IS NOT NULL";
+                                        $stmt = $conn->prepare($query);
+                                        $stmt->execute();
+                                        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                        if (isset($results)) {
+                                            foreach ($results as $row) {
+                                                echo '<tr>';
+                                                echo '<td>' . date('Y-m-d', strtotime($row['dia'])) . '</td>';
+                                                echo '<td>' . date('H:i', strtotime($row['hora'])) . '</td>';
+                                                echo '<td>' . $row['mesa'] . '</td>';
+                                                echo '</tr>';
+                                            }
+                                        } else {
+                                            echo '<tr><td colspan="3">Nenhum histórico de reservas com data e hora encontrado.</td></tr>';
+                                        }
+                                        ?>
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="card shadow mb-4">
                     <div class="card-body">
                         <div class="mesas">
                             <?php
-                        include './conexao/config.php';
+                            include './conexao/config.php';
 
-try {
-    // Obtém a data e a hora atuais
-    $currentTime = date('Y-m-d H:i:s');
-    $currentDate = date('Y-m-d');
+                            try {
+                                // Obtém a data e a hora atuais
+                                $currentTime = date('Y-m-d H:i:s');
+                                $currentDate = date('Y-m-d');
 
-    $query = "SELECT id_mesa as id, numero_mesa as mesa, situacao, statusMesa, data_reserva as dia, hora_reserva as hora FROM mesas WHERE situacao = 'ATIVO'";
-    $stmt = $conn->prepare($query);
-    $stmt->execute();
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                $query = "SELECT id_mesa as id, numero_mesa as mesa, situacao, statusMesa, data_reserva as dia, hora_reserva as hora FROM mesas WHERE situacao = 'ATIVO' AND id_mesa > 0"; // Adicionamos a condição id_mesa > 0 para evitar mesas com ID 0
+                                $stmt = $conn->prepare($query);
+                                $stmt->execute();
+                                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach ($results as $row4) {
-        echo '<div class="mesa">';
-        echo '<div>';
-        echo '<a href="#" class="btn-excluir text-dark" style="position:absolute; left: 10%" data-toggle="modal" data-target="#confirmDeleteModal' . $row4['id'] . '"><i class="fa fa-trash"></i></a>';
-        echo '</div>';
-        echo '<img src="./img/mesa.png" alt="Mesa">';
-        echo '<div class="mesa-info">';
-        echo 'ID: ' . $row4['id'];
-        echo '</div>';
-        echo '<div class="mesa-info">';
-        echo 'Nº Mesa: ' . $row4['mesa'];
-        echo '</div>';
+                                foreach ($results as $row4) {
+                                    echo '<div class="mesa">';
+                                    echo '<div>';
+                                    echo '<a href="#" class="btn-excluir text-dark" style="position:absolute; left: 10%" data-toggle="modal" data-target="#confirmDeleteModal' . $row4['id'] . '"><i class="fa fa-trash"></i></a>';
+                                    echo '</div>';
+                                    echo '<img src="./img/mesa.png" alt="Mesa">';
+                                    echo '<div class="mesa-info">';
+                                    echo 'ID: ' . $row4['id'];
+                                    echo '</div>';
+                                    echo '<div class="mesa-info">';
+                                    echo 'Nº Mesa: ' . $row4['mesa'];
+                                    echo '</div>';
 
-        if (!empty($row4['dia']) && !empty($row4['hora'])) {
-            // Calcula a data e hora de reserva como um único timestamp
-            $reservationTime = strtotime($row4['dia'] . ' ' . $row4['hora']);
-            $reservationDate = date('Y-m-d', $reservationTime);
+                                    if (!empty($row4['dia']) && !empty($row4['hora'])) {
+                                        // Calcula a data e hora de reserva como um único timestamp
+                                        $reservationTime = strtotime($row4['dia'] . ' ' . $row4['hora']);
+                                        $reservationDate = date('Y-m-d', $reservationTime);
 
-            // Verifica se o horário atual é maior do que o horário de reserva
-            if (strtotime($currentTime) > $reservationTime && $reservationDate != $currentDate) {
-                // Se o horário atual for maior e a data não for a mesma que a data atual,
-                // marque a mesa como "Disponível"
-                $statusMesa = 'Disponível';
+                                        // Verifica se o horário atual é maior do que o horário de reserva
+                                        if (strtotime($currentTime) > $reservationTime) {
+                                            // Se o horário atual for maior, marque a mesa como "Disponível"
+                                            $statusMesa = 'Disponível';
 
-                // Atualize o status da mesa para "Disponível" na base de dados
-                $updateStatusMesa = $conn->prepare("UPDATE mesas SET statusMesa = :statusMesa WHERE id_mesa = :id_mesa");
-                $updateStatusMesa->bindParam(':statusMesa', $statusMesa);
-                $updateStatusMesa->bindParam(':id_mesa', $row4['id']);
-                $updateStatusMesa->execute();
-            } else {
-                $statusMesa = 'Reservada';
-            }
+                                            // Atualize o status da mesa para "Disponível" na base de dados
+                                            $updateStatusMesa = $conn->prepare("UPDATE mesas SET statusMesa = :statusMesa WHERE id_mesa = :id_mesa");
+                                            $updateStatusMesa->bindParam(':statusMesa', $statusMesa);
+                                            $updateStatusMesa->bindParam(':id_mesa', $row4['id']);
+                                            $updateStatusMesa->execute();
+                                        } else {
+                                            // O horário de reserva ainda não passou, então exiba a mensagem de reserva
+                                            $statusMesa = 'Reservada';
+                                            echo '<div class="mesa-reservada">';
+                                            echo '<span class="reservada-label">Reservada:</span><br>';
+                                            echo '<span class="reservada-data">' . date('d/m/Y', strtotime($row4['dia'])) . '</span>';
+                                            echo '<span class="reservada-hora">' . date('H:i', strtotime($row4['hora'])) . '</span>';
+                                            echo '</div>';
+                                        }
+                                    } else {
+                                        // A mesa não tem data ou hora de reserva, marque-a como "Disponível"
+                                        $statusMesa = 'Disponível';
+                                    }
 
-            echo '<div class="mesa-reservada">';
-            echo '<span class="reservada-label">Reservada:</span><br>';
-            echo '<span class="reservada-data">' . date('d/m/Y', strtotime($row4['dia'])) . '</span>';
-            echo '<span class="reservada-hora">' . date('H:i', strtotime($row4['hora'])) . '</span>';
-            echo '</div>';
-        }
+                                    echo '<div class="mesa-acao">';
+                                    $idMesa = $row4['id'];
+                                    $queryPedidos = "SELECT COUNT(*) as total_pedidos FROM Pedidos WHERE id_mesa = :id_mesa AND situacao = 'ATIVO'";
+                                    $stmtPedidos = $conn->prepare($queryPedidos);
+                                    $stmtPedidos->bindParam(':id_mesa', $idMesa);
+                                    $stmtPedidos->execute();
+                                    $totalPedidos = $stmtPedidos->fetchColumn();
 
-        echo '<div class="mesa-acao">';
-        $idMesa = $row4['id'];
-        $queryPedidos = "SELECT COUNT(*) as total_pedidos FROM Pedidos WHERE id_mesa = :id_mesa AND situacao = 'ATIVO'";
-        $stmtPedidos = $conn->prepare($queryPedidos);
-        $stmtPedidos->bindParam(':id_mesa', $idMesa);
-        $stmtPedidos->execute();
-        $totalPedidos = $stmtPedidos->fetchColumn();
+                                    if (!empty($row4['dia']) && !empty($row4['hora'])) {
+                                        // Mesa com reserva, atualize o status para "Reservada"
+                                        $updateStatusMesa = $conn->prepare("UPDATE mesas SET statusMesa = :statusMesa WHERE id_mesa = :id_mesa");
+                                        $updateStatusMesa->bindParam(':statusMesa', $statusMesa);
+                                        $updateStatusMesa->bindParam(':id_mesa', $idMesa);
+                                        $updateStatusMesa->execute();
+                                        echo '<div class="status-mesa reservada">' . $statusMesa . '</div>';
+                                    } elseif ($totalPedidos > 0) {
+                                        // Há pedidos ativos relacionados a esta mesa, atualize o status para "Ocupada"
+                                        $statusMesa = 'Ocupada';
+                                        $updateStatusMesa = $conn->prepare("UPDATE mesas SET statusMesa = :statusMesa WHERE id_mesa = :id_mesa");
+                                        $updateStatusMesa->bindParam(':statusMesa', $statusMesa);
+                                        $updateStatusMesa->bindParam(':id_mesa', $idMesa);
+                                        $updateStatusMesa->execute();
+                                        echo '<div class="status-mesa ocupada">' . $statusMesa . '</div>';
+                                    } else {
+                                        // Não há pedidos ativos nem reservas relacionadas a esta mesa, atualize o status para "Disponível"
+                                        $statusMesa = 'Disponível';
+                                        $updateStatusMesa = $conn->prepare("UPDATE mesas SET statusMesa = :statusMesa WHERE id_mesa = :id_mesa");
+                                        $updateStatusMesa->bindParam(':statusMesa', $statusMesa);
+                                        $updateStatusMesa->bindParam(':id_mesa', $idMesa);
+                                        $updateStatusMesa->execute();
+                                        echo '<div class="status-mesa disponivel">' . $statusMesa . '</div>';
+                                    }
+                                    echo '</div>';
+                                    echo '</div>';
 
-        if (!empty($row4['dia']) && !empty($row4['hora'])) {
-            // Mesa com reserva, atualize o status para "Reservada"
-            $updateStatusMesa = $conn->prepare("UPDATE mesas SET statusMesa = :statusMesa WHERE id_mesa = :id_mesa");
-            $updateStatusMesa->bindParam(':statusMesa', $statusMesa);
-            $updateStatusMesa->bindParam(':id_mesa', $idMesa);
-            $updateStatusMesa->execute();
-            echo '<div class="status-mesa reservada">' . $statusMesa . '</div>';
-        } elseif ($totalPedidos > 0) {
-            // Há pedidos ativos relacionados a esta mesa, atualize o status para "Ocupada"
-            $statusMesa = 'Ocupada';
-            $updateStatusMesa = $conn->prepare("UPDATE mesas SET statusMesa = :statusMesa WHERE id_mesa = :id_mesa");
-            $updateStatusMesa->bindParam(':statusMesa', $statusMesa);
-            $updateStatusMesa->bindParam(':id_mesa', $idMesa);
-            $updateStatusMesa->execute();
-            echo '<div class="status-mesa ocupada">' . $statusMesa . '</div>';
-        } else {
-            // Não há pedidos ativos nem reservas relacionadas a esta mesa, atualize o status para "Disponível"
-            $statusMesa = 'Disponível';
-            $updateStatusMesa = $conn->prepare("UPDATE mesas SET statusMesa = :statusMesa WHERE id_mesa = :id_mesa");
-            $updateStatusMesa->bindParam(':statusMesa', $statusMesa);
-            $updateStatusMesa->bindParam(':id_mesa', $idMesa);
-            $updateStatusMesa->execute();
-            echo '<div class="status-mesa disponivel">' . $statusMesa . '</div>';
-        }
-        echo '</div>';
-        echo '</div>';
-
-        echo '<div class="modal fade" id="confirmDeleteModal' . $row4['id'] . '" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">';
-        echo '<div class="modal-dialog" role="document">';
-        echo '<div class="modal-content">';
-        echo '<div class="modal-header">';
-        echo '<h5 class="modal-title" id="confirmDeleteModalLabel">Confirmação</h5>';
-        echo '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">';
-        echo '<span aria-hidden=true">&times;</span>';
-        echo '</button>';
-        echo '</div>';
-        echo '<div class="modal-body">';
-        echo 'Tem certeza de que deseja excluir esta mesa?';
-        echo '</div>';
-        echo '<div class="modal-footer">';
-        echo '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>';
-        echo '<a href="deletar_mesa.php?id=' . $row4['id'] . '" class="btn btn-danger">Excluir</a>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-    }
-} catch (PDOException $e) {
-    echo "Erro na conexão: " . $e->getMessage();
-}
-
-?>
-
-
+                                    echo '<div class="modal fade" id="confirmDeleteModal' . $row4['id'] . '" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">';
+                                    echo '<div class="modal-dialog" role="document">';
+                                    echo '<div class="modal-content">';
+                                    echo '<div class="modal-header">';
+                                    echo '<h5 class="modal-title" id="confirmDeleteModalLabel">Confirmação</h5>';
+                                    echo '<button type="button" class="close" data-dismiss="modal" aria-label="Fechar">';
+                                    echo '<span aria-hidden=true">&times;</span>';
+                                    echo '</button>';
+                                    echo '</div>';
+                                    echo '<div class="modal-body">';
+                                    echo 'Tem certeza de que deseja excluir esta mesa?';
+                                    echo '</div>';
+                                    echo '<div class="modal-footer">';
+                                    echo '<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>';
+                                    echo '<a href="deletar_mesa.php?id=' . $row4['id'] . '" class="btn btn-danger">Excluir</a>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                    echo '</div>';
+                                }
+                            } catch (PDOException $e) {
+                                echo "Erro na conexão: " . $e->getMessage();
+                            }
 
 
-
-
-
-
+                            ?>
                         </div>
                     </div>
                 </div>
