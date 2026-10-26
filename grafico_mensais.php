@@ -1,13 +1,10 @@
 <?php
-$hostname = 'REMOVIDO';  // Endereço do servidor do banco de dados
-$port = '3306';
-$username = 'REMOVIDO';  // Nome de usuário do banco de dados
-$password = 'REMOVIDO';  // Senha do banco de dados
-$database = 'REMOVIDO';  // Nome do banco de dados
+// Credenciais carregadas de conexao/config.php (não versionado; veja conexao/config.example.php)
+require_once "./conexao/config.php";
 
 
 // Cria uma conexão com o MySQL
-$conn = new mysqli($hostname, $username, $password, $database);
+$conn = new mysqli($hostname, $username, $password, $database, (int) $port);
 
 // Verifica a conexão
 if ($conn->connect_error) {
