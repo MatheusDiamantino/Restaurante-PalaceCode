@@ -5,7 +5,7 @@ $hostname = 'localhost';
 $port     = '3306';
 $username = 'root';
 $password = '';
-$database = 'REMOVIDO';
+$database = 'restaurante';
 
 try {
     $conn = new PDO("mysql:host=$hostname;port=$port;dbname=$database", $username, $password);
